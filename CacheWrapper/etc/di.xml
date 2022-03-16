@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\Cache\Frontend\Factory">
+        <arguments>
+            <argument name="decorators" xsi:type="array">
+                <item name="tag" xsi:type="array">
+                    <item name="class" xsi:type="string">Public\CacheWrapper\Frontend\Decorator\CacheWrapper</item>
+                    <item name="parameters" xsi:type="array">
+                        <item name="tag" xsi:type="string">MAGE</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Framework\App\CacheInterface" type="Public\CacheWrapper\Frontend\Decorator\CacheWrapper" />
+</config>
