@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Public\CacheWrapper\Frontend\Decorator;
+namespace Guentur\CacheWrapper\Frontend\Decorator;
 
 use Magento\Framework\Serialize\SerializerInterface;
 use Psr\Log\LoggerInterface;
@@ -11,16 +11,12 @@ use Magento\Framework\ObjectManagerInterface;
 class CacheWrapper extends \Magento\Framework\App\Cache\Proxy
 {
     /**
-     * Tag to associate cache entries with
-     *
-     * @var string
+     * @var SerializerInterface
      */
     private $serializer;
 
     /**
-     * Tag to associate cache entries with
-     *
-     * @var string
+     * @var LoggerInterface
      */
     private $logger;
 

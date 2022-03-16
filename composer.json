@@ -1,5 +1,5 @@
 {
-  "name": "public/cache-wrapper",
+  "name": "guentur/cache-wrapper",
   "version": "1.0.0",
   "description": "Preference for Magento cache module. You can obtain data from cache, but if it isn't in cache, CacheWrapper module save it to cache automaticaly and then convey you the data from cache",
   "type": "magento2-module",
@@ -14,7 +14,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "Public\\CacheWrapper\\": ""
+      "Cache\\CacheWrapper\\": ""
     }
   }
 }
