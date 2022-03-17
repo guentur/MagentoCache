@@ -7,8 +7,9 @@ namespace Guentur\CacheWrapper\Frontend\Decorator;
 use Magento\Framework\Serialize\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Cache\Frontend\Decorator\TagScope;
 
-class CacheWrapper extends \Magento\Framework\App\Cache\Proxy
+class CacheWrapper extends TagScope
 {
     /**
      * @var SerializerInterface
@@ -21,16 +22,18 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy
     private $logger;
 
     /**
-     * @param \Magento\Framework\ObjectManagerInterface $objectManager
+     * @param \Magento\Framework\Cache\FrontendInterface $frontend
+     * @param $tag
      * @param SerializerInterface $serializer
      * @param LoggerInterface $logger
      */
     public function __construct(
-        ObjectManagerInterface $objectManager,
+        \Magento\Framework\Cache\FrontendInterface $frontend,
+                                                   $tag,
         SerializerInterface $serializer,
         LoggerInterface $logger
     ) {
-        parent::__construct($objectManager);
+        parent::__construct($frontend, $tag);
         $this->serializer = $serializer;
         $this->logger = $logger;
     }
