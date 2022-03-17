@@ -17,5 +17,7 @@
     "psr-4": {
       "Guentur\\CacheWrapper\\": ""
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
