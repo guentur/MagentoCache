@@ -41,9 +41,9 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheIn
      * @param string $index
      * @param callable $data
      * @param array $cacheTags
-     * @return array
+     * @return mixed
      */
-    public function getCached(string $index, callable $data, array $cacheTags = []): array
+    public function getCached(string $index, callable $data, array $cacheTags = [])
     {
         $cachedData = $this->getDataFromCache($index);
 
@@ -57,7 +57,7 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheIn
 
     /**
      * @param string $index
-     * @return array|null
+     * @return mixed
      */
     public function getDataFromCache(string $index)
     {
