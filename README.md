@@ -2,7 +2,7 @@
 
 ## Описание методов интерфейса App\CacheInterface
 `getCached(string $index, callable $data, array $cacheTags = []): array` - достает из кеша данные по индексу (`$index`), если в кеш по переданному индексу пуст,
-тогда `getCached()` сохраняет данные, возвращаемые анонимной функцией `$data`.
+тогда `getCached()` сохраняет данные, возвращаемые [анонимной функцией](https://www.php.net/manual/ru/functions.anonymous.php) `$data`.
 
 `array $cacheTags` массив строк, идентифицирующих область влияния кеша. Используются для очищения кеша.
 
@@ -12,7 +12,20 @@
 не передав его явно на этапе сохранения кеша в массив тегов.
 В даном модуле `$index` автоматически передается в массив тегов на этапе сохранения
 
-..............@todo Привести пример передачи данных в аргументе `callable $data`
+Пример передачи аргумента `$data` данных, для кеширования.
+```php
+$this->cache->getCached(
+            'cache_key_index',
+            function () use ($greaterThan) {
+                return $this->discountTierCollectionFactory->create()
+                    ->addFieldToFilter(self::SOME_ATTRIBUTE, ["gt" => $greaterThan])
+                    ->setOrder(self::DISCOUNT_MIN_QTY, Collection::SORT_ORDER_ASC)
+                    ->getFirstItem()
+                    ->getData();
+            }
+        );
+```
+Функция будет вызвана только если данные не найдены в кеше. Использование анонимной функции для передачи данных можно назвать оптимизацией.
 
 `getDataFromCache(string $index): ?array`
 
