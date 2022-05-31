@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Guentur\CacheWrapper\App\Cache;
+namespace Guentur\CacheWrapper\Model\Cache;
 
-use Magento\Framework\ObjectManager\NoninterceptableInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\ObjectManagerInterface;
-use Guentur\CacheWrapper\App\CacheInterface;
+use Guentur\CacheWrapper\App\CacheInterface as CacheWrapperInterface;
 
-class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheInterface, NoninterceptableInterface
+class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheWrapperInterface
 {
     /**
      * @var SerializerInterface
@@ -41,9 +40,10 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheIn
      * @param string $index
      * @param callable $data
      * @param array $cacheTags
-     * @return mixed
+     * @return array
+     * @throws \Zend_Cache_Exception
      */
-    public function getCached(string $index, callable $data, array $cacheTags = [])
+    public function getCached(string $index, callable $data, array $cacheTags = []): array
     {
         $cachedData = $this->getDataFromCache($index);
 
@@ -57,9 +57,9 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheIn
 
     /**
      * @param string $index
-     * @return mixed
+     * @return array|null
      */
-    public function getDataFromCache(string $index)
+    public function getDataFromCache(string $index): ?array
     {
         $result = null;
         $serializedData = $this->load($index);
@@ -79,6 +79,7 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheIn
      * @param array $data
      * @param array $cacheTags
      * @return void
+     * @throws \Zend_Cache_Exception
      */
     public function saveToCache(string $index, array $data, array $cacheTags = []): void
     {
@@ -99,8 +100,14 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheIn
         }
     }
 
-    public function cleanWithMode(string $mode, array $tags = [])
+    /**
+     * @param string $mode
+     * @param array $tags
+     * @return bool
+     * @throws \Zend_Cache_Exception
+     */
+    public function cleanWithMode(string $mode, array $tags = []): bool
     {
-        $this->getFrontend()->clean($mode, $tags);
+        return $this->getFrontend()->clean($mode, $tags);
     }
 }

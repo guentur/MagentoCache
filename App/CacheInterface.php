@@ -6,6 +6,9 @@ namespace Guentur\CacheWrapper\App;
 
 use Magento\Framework\App\CacheInterface as FrameworkCacheInterface;
 
+/**
+ * @api
+ */
 interface CacheInterface extends FrameworkCacheInterface
 {
     /**
