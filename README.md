@@ -59,8 +59,15 @@ $this->cache->getCached(
 ## Очщение кеша
 `cleanWithMode(string $mode, array $tags = []): bool`
 
-Вы можете имплементировать интерфейс `Magento\Framework\App\CacheInterface` для работы с кешем, но в таком случае вам будет доступна только возможность очистить кеш по моду CLEANING_MODE_ALL
-.........@todo
+- `string $mode` - Режим удаления кеша. Подробнее можно прочитать в [документации Zend_Cache](https://framework.zend.com/manual/1.10/en/zend.cache.theory.html)
+- `string[] $cacheTags` - [Теги кеша](#glossary).
+
+### Доступные режимы:
+- `all` (default) => remove all cache entries ($tags is not used)
+- `old` => remove too old cache entries ($tags is not used)
+- `matchingTag` => remove cache entries matching all given tags ($tags can be an array of strings or a single string)
+- `notMatchingTag` => remove cache entries not matching one of the given tags ($tags can be an array of strings or a single string)
+- `matchingAnyTag` => remove cache entries matching any given tags ($tags can be an array of strings or a single string)
 
 > В стандартном функционале Magento, очистить кеш по идентификатору `$index` нет возможности,
 не передав его явно на этапе сохранения кеша в массив тегов. Он служит только для получения данных.
@@ -69,4 +76,4 @@ $this->cache->getCached(
 ## Заметки. Как работает кеш в Magento 2
 Базовый класс для работы с кешем в Magento 2 - `Magento\Framework\Cache\Core` наследуется от `\Zend_Cache_Core`
 
-......@todo
+@todo

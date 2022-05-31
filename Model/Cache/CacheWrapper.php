@@ -101,6 +101,18 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheWr
     }
 
     /**
+     * Clean cache entries
+     *
+     * Available modes are :
+     * 'all' (default)  => remove all cache entries ($tags is not used)
+     * 'old'            => remove too old cache entries ($tags is not used)
+     * 'matchingTag'    => remove cache entries matching all given tags
+     *                     ($tags can be an array of strings or a single string)
+     * 'notMatchingTag' => remove cache entries not matching one of the given tags
+     *                     ($tags can be an array of strings or a single string)
+     * 'matchingAnyTag' => remove cache entries matching any given tags
+     *                     ($tags can be an array of strings or a single string)
+     *
      * @param string $mode
      * @param array $tags
      * @return bool
