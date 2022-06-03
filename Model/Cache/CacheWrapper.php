@@ -69,7 +69,8 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheWr
                 $result = $this->serializer->unserialize($serializedData);
             }
         } catch (\InvalidArgumentException $e) {
-            $this->logger->error($e->getMessage() . $e->getTraceAsString());
+            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getTraceAsString());
         }
         return $result;
     }
@@ -83,8 +84,7 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheWr
      */
     public function saveToCache(string $index, array $data, array $cacheTags = []): void
     {
-        $this->cleanWithMode(\Zend_Cache::CLEANING_MODE_MATCHING_TAG, [$index]);
-        $cacheTags[] = $index;
+        $this->remove($index);
         try {
             $result = $this->save(
                 $this->serializer->serialize($data),
