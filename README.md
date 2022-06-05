@@ -32,7 +32,29 @@
 ваша запись пренадлежит - передайте при её сохранении тег, который определен в 
 [классе типа кеша](https://developer.adobe.com/commerce/php/development/cache/partial/cache-type/)
 
-[//]: # (- Теги кеша - Массив строк, идентифицирующих отдельные записи одного типа кеша. Используются для частичного очищения кеша.)
+### Пример:
+Находим класс кеша по его идентификатору в конфигурации `cache.xml`:
+```xml
+...
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="full_page" translate="label,description" instance="Magento\PageCache\Model\Cache\Type">
+        <label>Page Cache</label>
+        <description>Full page caching</description>
+    </type>
+</config>
+```
+Передаем тег из класса типа:
+```php
+return $this->cache->getCached(
+            'some_cache_key',
+            function () {
+                ...
+                return $data;
+            },
+            [\Magento\PageCache\Model\Cache\Type::CACHE_TAG],
+            86400
+        );
+```
 
 ## Сохранение в кеш
 `saveToCache(string $index, array $data, array $cacheTags = [], $lifeTime = null): void`
