@@ -40,16 +40,17 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheWr
      * @param string $index
      * @param callable $data
      * @param array $cacheTags
+     * @param int $lifeTime
      * @return array
      * @throws \Zend_Cache_Exception
      */
-    public function getCached(string $index, callable $data, array $cacheTags = []): array
+    public function getCached(string $index, callable $data, array $cacheTags = [], $lifeTime = null): array
     {
         $cachedData = $this->getDataFromCache($index);
 
         if (!$cachedData) {
             $cachedData = $data();
-            $this->saveToCache($index, $cachedData, $cacheTags);
+            $this->saveToCache($index, $cachedData, $cacheTags, $lifeTime);
         }
 
         return $cachedData;
@@ -79,17 +80,19 @@ class CacheWrapper extends \Magento\Framework\App\Cache\Proxy implements CacheWr
      * @param string $index
      * @param array $data
      * @param array $cacheTags
+     * @param int $lifeTime
      * @return void
      * @throws \Zend_Cache_Exception
      */
-    public function saveToCache(string $index, array $data, array $cacheTags = []): void
+    public function saveToCache(string $index, array $data, array $cacheTags = [], $lifeTime = null): void
     {
         $this->remove($index);
         try {
             $result = $this->save(
                 $this->serializer->serialize($data),
                 $index,
-                $cacheTags
+                $cacheTags,
+                $lifeTime
             );
             if (!$result) {
                 throw new \OutOfRangeException(__("Cache with index $index is not saved"));

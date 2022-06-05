@@ -15,9 +15,10 @@ interface CacheInterface extends FrameworkCacheInterface
      * @param string $index
      * @param callable $data
      * @param array $cacheTags
+     * @param int $lifeTime
      * @return mixed
      */
-    public function getCached(string $index, callable $data, array $cacheTags = []);
+    public function getCached(string $index, callable $data, array $cacheTags = [], $lifeTime = null);
 
     /**
      * @param string $index
@@ -29,9 +30,10 @@ interface CacheInterface extends FrameworkCacheInterface
      * @param string $index
      * @param array $data
      * @param array $cacheTags
+     * @param int $lifeTime
      * @return mixed
      */
-    public function saveToCache(string $index, array $data, array $cacheTags = []);
+    public function saveToCache(string $index, array $data, array $cacheTags = [], $lifeTime = null);
 
     /**
      * Clean cache entries
