@@ -20,25 +20,33 @@
 Также модуль переопределяет preference для `Magento\Framework\App\CacheInterface` 
 (смотрите в Guentur/CacheWrapperetc/di.xml), так что методы модуля можно вызывать из стандартного интерфейса.
 
-[//]: # (## Glossary)
+## Glossary
+- Идентификатор кеша - Уникален и используется для получения одной конкретной записи. 
+Не должны сохраняться несколько записей под одним идентификатором.
 
-[//]: # (- Идентификатор кеша - Используется для получения всех записей, сохраненных с одним идентификатором.)
+- Теги кеша — это способ классификации записей кэша. Когда вы сохраняете кеш, вы можете установить массив тегов, 
+которые будут применяться к этой записи. Затем вы сможете очистить все записи кеша, 
+помеченные данным тегом (или тегами). Теги могут повторяться в разных *записях* кеша. 
+
+Чтобы указать к какому [типу кеша](https://devdocs.magento.com/guides/v2.4/config-guide/cli/config-cli-subcommands-cache.html#config-cli-subcommands-cache-clean-over) 
+ваша запись пренадлежит - передайте при её сохранении тег, который определен в 
+[классе типа кеша](https://developer.adobe.com/commerce/php/development/cache/partial/cache-type/)
 
 [//]: # (- Теги кеша - Массив строк, идентифицирующих отдельные записи одного типа кеша. Используются для частичного очищения кеша.)
 
 ## Сохранение в кеш
 `saveToCache(string $index, array $data, array $cacheTags = []): void`
 
-- `string $index` - Идентификатор кеша. Используется для получения всех записей, сохраненных с одним идентификатором.
+- `string $index` - [Идентификатор кеша](#glossary). Используется для получения всех записей, сохраненных с одним идентификатором.
 - `array $data` - Данные для сохранения.
-- `string[] $cacheTags` - Теги кеша.
+- `string[] $cacheTags` - [Теги кеша](#glossary)..
 
 ## Получение данных из кеша
 `getCached(string $index, callable $data, array $cacheTags = []): array`
 
-- `string $index` - Идентификатор кеша. Используется при получения данных.
+- `string $index` - [Идентификатор кеша](#glossary). Используется при получения данных.
 - `callable $data` - [Анонимная функция](https://www.php.net/manual/ru/functions.anonymous.php), возвращает **массив** данных для сохранения.
-- `string[] $cacheTags` - Теги кеша
+- `string[] $cacheTags` - [Теги кеша](#glossary).
 
 ### Если не не удалось достать данные из кеша:
 Вызывается `callable $data` для получения данных, которые должны быть в кеше.
@@ -65,7 +73,7 @@ $this->cache->getCached(
 `cleanWithMode(string $mode, array $tags = []): bool`
 
 - `string $mode` - Режим удаления кеша. Подробнее можно прочитать в [документации Zend_Cache](https://framework.zend.com/manual/1.10/en/zend.cache.theory.html)
-- `string[] $cacheTags` - Теги кеша
+- `string[] $cacheTags` - [Теги кеша](#glossary).
 
 ### Доступные режимы:
 - `all` (default) => remove all cache entries ($tags is not used)
