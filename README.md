@@ -35,18 +35,20 @@
 [//]: # (- Теги кеша - Массив строк, идентифицирующих отдельные записи одного типа кеша. Используются для частичного очищения кеша.)
 
 ## Сохранение в кеш
-`saveToCache(string $index, array $data, array $cacheTags = []): void`
+`saveToCache(string $index, array $data, array $cacheTags = [], $lifeTime = null): void`
 
 - `string $index` - [Идентификатор кеша](#glossary). Используется для получения всех записей, сохраненных с одним идентификатором.
 - `array $data` - Данные для сохранения.
-- `string[] $cacheTags` - [Теги кеша](#glossary)..
+- `string[] $cacheTags` - [Теги кеша](#glossary).
+- `int $lifeTime = null` - Время жизни кеша.
 
 ## Получение данных из кеша
-`getCached(string $index, callable $data, array $cacheTags = []): array`
+`getCached(string $index, callable $data, array $cacheTags = [], $lifeTime = null): array`
 
 - `string $index` - [Идентификатор кеша](#glossary). Используется при получения данных.
 - `callable $data` - [Анонимная функция](https://www.php.net/manual/ru/functions.anonymous.php), возвращает **массив** данных для сохранения.
 - `string[] $cacheTags` - [Теги кеша](#glossary).
+- `int $lifeTime = null` - Время жизни кеша.
 
 ### Если не не удалось достать данные из кеша:
 Вызывается `callable $data` для получения данных, которые должны быть в кеше.
