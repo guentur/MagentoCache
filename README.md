@@ -30,7 +30,7 @@
 
 Чтобы указать к какому [типу кеша](https://devdocs.magento.com/guides/v2.4/config-guide/cli/config-cli-subcommands-cache.html#config-cli-subcommands-cache-clean-over) 
 ваша запись пренадлежит - передайте при её сохранении тег, который определен в 
-[классе типа кеша](https://developer.adobe.com/commerce/php/development/cache/partial/cache-type/)
+[классе типа кеша](https://developer.adobe.com/commerce/php/development/cache/partial/cache-type/#cache-type-model)
 
 ### Пример:
 Находим класс кеша по его идентификатору в конфигурации `cache.xml`:
