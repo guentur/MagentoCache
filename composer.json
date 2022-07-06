@@ -1,22 +1,22 @@
 {
-  "name": "guentur/cache-wrapper",
-  "description": "Preference for Magento cache module. You can obtain data from cache, but if it isn't in cache, CacheWrapper module save it to the cache automaticaly and then convey you the data from cache",
-  "type": "magento2-module",
-  "require": {
-    "magento/framework": "*",
-    "php": "~7.3.0||~7.4.0"
-  },
-  "license": [
-    "CC0-1.0"
-  ],
-  "autoload": {
-    "files": [
-      "registration.php"
+    "name": "guentur/cache-wrapper",
+    "description": "Preference for Magento cache module. You can obtain data from cache, but if it isn't in cache, CacheWrapper module save it to the cache automaticaly and then convey you the data from cache",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "php": "~7.3.0||~7.4.0"
+    },
+    "license": [
+        "CC0-1.0"
     ],
-    "psr-4": {
-      "Guentur\\CacheWrapper\\": ""
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Guentur\\CacheWrapper\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
