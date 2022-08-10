@@ -93,7 +93,7 @@ $this->cache->getCached(
 ```
 > Использование анонимной функции для передачи данных можно назвать оптимизацией.
 
-## Очщение кеша
+## Очищение кеша
 `cleanWithMode(string $mode, array $tags = []): bool`
 
 - `string $mode` - Режим удаления кеша. Подробнее можно прочитать в [документации Zend_Cache](https://framework.zend.com/manual/1.10/en/zend.cache.theory.html)
